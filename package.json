@@ -1,0 +1,92 @@
+{
+  "name": "@datapain/binder",
+  "version": "0.0.0",
+  "description": "Web server with extensions for the JAMstack static files",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node index.js",
+    "start:watch": "nodemon",
+    "start:watch-debug": "nodemon --config nodemon-debug.json",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "tsc-check": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/faker": "^5.1.5",
+    "@types/jest": "^26.0.19",
+    "@types/node": "^14.14.16",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "husky": "^4.3.6",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datapain/binder.git"
+  },
+  "keywords": [],
+  "author": "Konstantin Tsepelev <strangeratthedoor@gmail.com> (https://github.com/datapain)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/datapain/binder/issues"
+  },
+  "homepage": "https://github.com/datapain/binder#readme",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "roots": [
+      "<rootDir>/tests/",
+      "<rootDir>/src/"
+    ],
+    "testTimeout": 30000,
+    "rootDir": ".",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "setupFiles": [
+      "./tests/jest.settings.ts"
+    ],
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "testEnvironment": "node"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged && npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix"
+    ]
+  }
+}
